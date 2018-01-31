@@ -61,25 +61,34 @@ public class Sorts {
 			}
 		}
 
-		for (int i = 0; i < nextPlace.length; i++) {
-			System.out.print("|" + i + ":" + nextPlace[i]);
-		}
-		System.out.println("");
-		for (int i = 0; i < counts.length; i++) {
-			System.out.print("/" + i + ":" + counts[i]);
-		}
+		
 
 		// The auxiliary array into which to sort the array
 		@SuppressWarnings("unchecked")
 		T[] aux = (T[]) new Object[array.length];
 		// D. Sort the items into aux
-		
-		for(int i = 0;  i < array.length; i++) {
-		}
 
-		// E. move them back to array
-		// add loop here
+		// run through every element in array
+		for(int i = 0; i < array.length; i++){
+			// grab the key of the element at the current index
+			int el = toInt.v(array[i]);
+			// make sure this key is in nextPlace
+			if (el < nextPlace.length) {
+				// put the element at array[i] in the correct spot in aux
+				aux[nextPlace[el]] = array[i];
+				// update nextPlace[el] so the next value with this key goes in the next spot
+				nextPlace[el]++;
+			}
+		}
+		
+		// copy the items from aux back into array
+		for(int i = 0; i < array.length; i++) {
+			array[i] = aux[i];
+		}
+		
 	}
+	// E. move them back to array
+	// add loop here
 
 	/**
 	 * Sort the given array using radix sort with the given radix.
