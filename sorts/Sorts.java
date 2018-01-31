@@ -25,18 +25,16 @@ public class Sorts {
 	 */
 	public static <T> void countingSort(T[] array, ToInteger<T> toInt) {
 
-		// The maximum value in the array (once we calculate it)
+		// The maximum value in the array
 		int maxVal = 0;
-		// A. Find the maximum value in the array
-		// add loop here
+		
 		for (int i = 0; i < array.length; i++) {
 			if (toInt.v(array[i]) > maxVal)
 				maxVal = toInt.v(array[i]);
 		}
 		// The occurrences of each value (once we calculate them)
 		int[] counts = new int[maxVal + 1];
-		// B. tabulate the occurrences of each value
-		// add loop here
+		
 		for (int i = 0; i < array.length; i++) {
 			int temp = toInt.v(array[i]);
 			counts[temp]++;
@@ -44,7 +42,6 @@ public class Sorts {
 
 		// The initial places for each value (once we calculate them)
 		int[] nextPlace = new int[maxVal + 1];
-		// C. Determine the initial next place for each value
 		nextPlace[0] = 0;
 
 		// sumPrev is the sum of all previous counts so the nextPlace
@@ -66,8 +63,7 @@ public class Sorts {
 		// The auxiliary array into which to sort the array
 		@SuppressWarnings("unchecked")
 		T[] aux = (T[]) new Object[array.length];
-		// D. Sort the items into aux
-
+		
 		// run through every element in array
 		for(int i = 0; i < array.length; i++){
 			// grab the key of the element at the current index
@@ -87,8 +83,6 @@ public class Sorts {
 		}
 		
 	}
-	// E. move them back to array
-	// add loop here
 
 	/**
 	 * Sort the given array using radix sort with the given radix.
@@ -119,7 +113,7 @@ public class Sorts {
 			final int rp = rPow;
 			countingSort(array, new ToInteger<Integer>() {
 				public int v(Integer item) {
-					throw new UnsupportedOperationException();
+					return (item/rp) % r;
 				}
 			});
 			rPow *= r;
